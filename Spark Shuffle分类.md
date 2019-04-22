@@ -2,6 +2,18 @@ Spark 2.0
 --
 Spark 2.0之前有Hash Based Shuffle，Spark 2.0之后Spark只有Sort Based Shuffle
 
+三种ShuffleWriter
+--
+
+|BypassMergeSortShuffleWriter| UnsafeShuffleWriter| SortShuffleWriter
+| :-----------:|:-----------:| :-----:|
+| 和Hash Shuffle实现基本相同，区别在于map task输出会汇总为一个文件     | tungsten-sort，ShuffleExternalSorter使用Java Unsafe直接操作内存，避免Java对象多余的开销和GC 延迟，效率高 | 和Hash Shuffle的主要不同在于，map端支持Partition级别的sort，map task输出会汇总为一个文件 |
+
+* BypassMergeSortShuffleWriter	和Hash Shuffle实现基本相同，区别在于map task输出会汇总为一个文件
+* UnsafeShuffleWriter	tungsten-sort，ShuffleExternalSorter使用Java Unsafe直接操作内存，避免Java对象多余的开销和GC 延迟，效率高
+* SortShuffleWriter	Sort Shuffle，和Hash Shuffle的主要不同在于，map端支持Partition级别的sort，map task输出会汇总为一个文件
+
+
 ShuffleExternalSorter
 --
 ShuffleExternalSorter发生在shuffle write阶段。
