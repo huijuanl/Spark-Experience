@@ -16,7 +16,7 @@ ShuffleExternalSorter发生在shuffle write阶段。
   ```
 设置了参数numElementsForSpillThreshold，可以通过spark.shuffle.spill.numElementsForceSpillThreshold来设置，默认是Integer.MAX_VALUE。
 
-UnsafeShuffleWriter类依赖于ShuffleExternalSorter,
+UnsafeShuffleWriter类会调用ShuffleExternalSorter
 
 
 ```
@@ -29,3 +29,8 @@ UnsafeShuffleWriter类依赖于ShuffleExternalSorter,
 ExternalSorter
 --
 ExternalSorter发生在shuffle read阶段，一个reduce task对应一个ExternalSorter。
+
+SortShuffleWriter会调用ExternalSorter。
+SortShuffleWriter和UnsafeShuffleWriter都继承自ShuffleWriter。
+
+
