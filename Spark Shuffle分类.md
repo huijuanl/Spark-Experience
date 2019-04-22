@@ -1,4 +1,4 @@
-Spark 2.0 
+Spark 2.0 +
 --
 Spark 2.0之前有Hash Based Shuffle，Spark 2.0之后Spark只有Sort Based Shuffle
 
@@ -101,7 +101,13 @@ ExternalSorter发生在shuffle read阶段，一个reduce task对应一个Externa
 SortShuffleWriter会调用ExternalSorter。
 SortShuffleWriter和UnsafeShuffleWriter都继承自ShuffleWriter。
 
-
+Shuffle源码剖析
+--
+org.apache.spark.scheduler.ShuffleMapTask#runTask
+    ---> org.apache.spark.shuffle.sort.SortShuffleManager#getWriter
+        ---> org.apache.spark.shuffle.sort.SortShuffleWriter#write(如果是普通sort)
+        ---> org.apache.spark.shuffle.sort.UnsafeShuffleWriter#write (如果是Tungsten-sort)
 参考链接
 --
 https://tech.youzan.com/spark_memory_1/
+https://www.jianshu.com/p/4c5c2e535da5
