@@ -122,6 +122,15 @@ Scala支持两种形式的隐式转换：
 隐式视图：用于类型间转换或针对某类型的方法能调用成功
 
 
+疑问：
 
+RangePartitioner.readObject中的
+```
+ val ser = sfactory.newInstance()
+        Utils.deserializeViaNestedStream(in, ser) { ds =>
+          implicit val classTag = ds.readObject[ClassTag[Array[K]]]()
+          rangeBounds = ds.readObject[Array[K]]()
+```
+what does "implicit val classTag = ds.readObject[ClassTag[Array[K]]]()" mean ?
 https://www.cnblogs.com/MOBIN/p/5351900.html
 https://fangjian0423.github.io/2015/12/20/scala-implicit/
