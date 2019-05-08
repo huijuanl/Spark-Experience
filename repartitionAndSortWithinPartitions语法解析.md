@@ -48,6 +48,24 @@ repartitionAndSortWithinPartitions算子源码的使用还涉及到隐式转换�
 
 * 使用方式
 1.将方法或变量标记为implicit
+方法标记为implicit:
+
+```
+implicit def 函数名(参数名：参数类型)={...}
+```
+
+如
+
+```
+scala> implicit def intToString(x : Int) = x.toString
+intToString: (x: Int)String
+ 
+scala> foo(10)
+10
+```
+
+变量标记为implicit:
+
 ```
 implicit 变量名 类型名
 ```
@@ -55,6 +73,8 @@ implicit 变量名 类型名
 ```
 implicit name : String
 ```
+
+
 2.将方法的参数列表标记为implicit
 如:
 ```
