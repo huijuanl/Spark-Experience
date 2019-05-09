@@ -2,7 +2,7 @@
 
 * DataNode
 
-* driver
+* Driver
 
 * applicationMaster
 
@@ -22,6 +22,15 @@
 * NodeManager
 
 
+* Yarn Client 和 Yarn Cluster的区别：
+
+对于yarn-client和yarn-cluster的唯一区别在于：
+
+1. yarn-client的Driver运行在本地，而AppMaster运行在yarn的一个节点上，它们之间进行远程通信，AppMaster只负责资源申请和释放(当然还有DelegationToken的刷新)，然后等待Driver的完成；
+
+2. yarn-cluster的Driver则运行在AppMaster所在的container里，Driver和AppMaster是同一个进程的两个不同线程，它们之间也会进行通信，AppMaster同样等待Driver的完成，从而释放资源。
+
+AM和Driver
 
 NameNode和DataNode都被设计成可以在普通商用计算机上运行。这些计算机通常运行的是GNU/Linux操作系统。
 HDFS采用Java语言开发，因此任何支持Java的机器都可以部署NameNode和DataNode。一个典型的部署场景是集群中的一台机器运行一个NameNode实例，其他机器分别运行一个DataNode实例。当然，并不排除一台机器运行多个DataNode实例的情况。
