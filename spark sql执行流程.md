@@ -7,7 +7,7 @@ DataFrame                            ^
                                   Catalog
                                   
 
-Sql语句首先通过Parser模块被解析为语法树，此棵树称为Unresolved Logical Plan;Unresolved Logical Plan 通过Analyzer模块借助于Catalog中的表信息解析为Logical Plan.
+Sql语句首先通过Parser模块被解析为语法树，此棵树称为Unresolved Logical Plan(是一种AST(抽象语法树);Unresolved Logical Plan 通过Analyzer模块借助于Catalog中的表信息解析为Logical Plan.
 此时，Optimizer再通过各种基于规则的优化策略进行深入优化，得到Optimized Logical Plan.优化后的逻辑执行计划依然是逻辑的，并不能被spark所理解，需要将此逻辑计划转换为Physical
 Plan.
 
